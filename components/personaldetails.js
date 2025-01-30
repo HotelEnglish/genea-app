@@ -4,7 +4,7 @@ Vue.component('personaldetails', {
             <div class="row" style="margin-bottom: 0;">
                 <div class="col s12 offset-m1">
                     <h1 class="header">
-                        Personal Details
+                        个人信息
                     </h1>
                 </div>
             </div>
@@ -17,7 +17,7 @@ Vue.component('personaldetails', {
                                 <label>
                                     <input type="checkbox" v-model="advancedMode">
                                     <span class="lever"></span>
-                                    Advanced fields
+                                    高级领域
                                 </label>
                             </div>
                         </li>
@@ -28,42 +28,42 @@ Vue.component('personaldetails', {
             <!-- Modals -->
             <div id="modalEditPersonalDetail" class="modal">
                 <div class="modal-content">
-                    <h4>Edit</h4>
+                    <h4>编辑</h4>
                     <div class="input-field">
                         <label for="editTag" :class="{active:modalEditPersonalDetail.tag}">Tag</label>
                         <input id="editTag" type="text" v-model="modalEditPersonalDetail.tag" />
                     </div>
                     <div class="input-field">
-                        <label for="editValue" class="active">Value</label>
+                        <label for="editValue" class="active">值</label>
                         <textarea id="editValue" class="materialize-textarea" v-model="modalEditPersonalDetail.value"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="modal-close waves-effect waves-green btn-flat">Close</a>
+                    <a class="modal-close waves-effect waves-green btn-flat">关闭</a>
                 </div>
             </div>
             <div id="modalAddPersonalDetail" class="modal">
                 <div class="modal-content">
-                    <h4>Add</h4>
+                    <h4>添加</h4>
                     <ul class="collection with-header">
                         <li class="collection-header"><h5>Foundation</h5></li>
-                        <li class="collection-item modal-close" v-on:click="addItem('NAME')">Name<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item modal-close" v-on:click="addItem('BIRTH')">Birth<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item modal-close" v-on:click="addItem('DEATH')">Death<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item modal-close" v-on:click="addItem('BURIAL')">Burial<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-header"><h5>Annotation</h5></li>
-                        <li class="collection-item modal-close" v-on:click="addItem('NOTES')">Notes<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-item modal-close" v-on:click="addItem('TEXT')">Text<a class="secondary-content"><i class="material-icons">add</i></a></li>
-                        <li class="collection-header"><h5>Custom</h5></li>
-                        <li class="collection-item modal-close" v-on:click="addItem('CUSTOM')">Custom<a class="secondary-content"><i class="material-icons">add</i></a></li>
+                        <li class="collection-item modal-close" v-on:click="addItem('NAME')">Name<a class="secondary-content"><i class="material-icons">添加</i></a></li>
+                        <li class="collection-item modal-close" v-on:click="addItem('BIRTH')">Birth<a class="secondary-content"><i class="material-icons">添加</i></a></li>
+                        <li class="collection-item modal-close" v-on:click="addItem('DEATH')">Death<a class="secondary-content"><i class="material-icons">添加</i></a></li>
+                        <li class="collection-item modal-close" v-on:click="addItem('BURIAL')">Burial<a class="secondary-content"><i class="material-icons">添加</i></a></li>
+                        <li class="collection-header"><h5>注释</h5></li>
+                        <li class="collection-item modal-close" v-on:click="addItem('NOTES')">Notes<a class="secondary-content"><i class="material-icons">添加</i></a></li>
+                        <li class="collection-item modal-close" v-on:click="addItem('TEXT')">Text<a class="secondary-content"><i class="material-icons">添加</i></a></li>
+                        <li class="collection-header"><h5>习俗</h5></li>
+                        <li class="collection-item modal-close" v-on:click="addItem('CUSTOM')">Custom<a class="secondary-content"><i class="material-icons">添加</i></a></li>
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <a class="modal-close waves-effect waves-green btn-flat">Close</a>
+                    <a class="modal-close waves-effect waves-green btn-flat">关闭</a>
                 </div>
             </div>
             <div style="position: fixed; bottom: 45px; right: 24px;">
-                <button data-target="modalAddPersonalDetail" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></button>
+                <button data-target="modalAddPersonalDetail" class="btn modal-trigger btn-floating btn-large waves-effect waves-light red"><i class="material-icons">添加</i></button>
             </div>
         </div>
     `,
@@ -135,11 +135,11 @@ Vue.component('personaldetails-item', {
                     <div class="fixed-action-btn horizontal direction-top direction-left" style="position: absolute; display: inline-block; right: 24px;">
                         <a class="btn-floating btn-large transparent z-depth-0" style="cursor: default;"><i class="large material-icons teal-text text-lighten-3">more_vert</i></a>
                         <ul>
-                            <li v-if="index > 0"><a class="btn-floating teal lighten-4"><i class="material-icons" v-on:click="upItem();">arrow_drop_up</i></a></li>
-                            <li v-if="index < $parent.items.length - 1"><a class="btn-floating teal lighten-4"><i class="material-icons" v-on:click="downItem();">arrow_drop_down</i></a></li>
-                            <li><a class="btn-floating red"><i class="material-icons" v-on:click="deleteItem();">clear</i></a></li>
-                            <li><a class="btn-floating yellow darken-1"><i class="material-icons" v-on:click="addItem();">add</i></a></li>
-                            <li><a class="btn-floating green"><i class="material-icons" v-on:click="editItem();">mode_edit</i></a></li>
+                            <li v-if="index > 0"><a class="btn-floating teal lighten-4"><i class="material-icons" v-on:click="upItem();">箭头向上</i></a></li>
+                            <li v-if="index < $parent.items.length - 1"><a class="btn-floating teal lighten-4"><i class="material-icons" v-on:click="downItem();">箭头向下</i></a></li>
+                            <li><a class="btn-floating red"><i class="material-icons" v-on:click="deleteItem();">清除</i></a></li>
+                            <li><a class="btn-floating yellow darken-1"><i class="material-icons" v-on:click="addItem();">添加</i></a></li>
+                            <li><a class="btn-floating green"><i class="material-icons" v-on:click="editItem();">模式编辑</i></a></li>
                         </ul>
                     </div>
                 </div>
