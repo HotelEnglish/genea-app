@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <title>Genea.app - Build your family tree</title>
+    <title>Genea.app - 构建您的家谱</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Genea is a free tool to author your family tree without an account. Genea gives you complete control over where to store your GEDCOM ancestry heritage data." />
-    <meta name="keywords" content="genea,genealogy,software,free,open source,gedcom,family tree,family lineage,heritage,myheritage,web based,online,genealogist,historian,ancestors,archive,ancestry,legacy,birth,death,funeral,marriage,privacy by design" />
+    <meta name="description" content="Genea 是一个免费的工具，无需注册即可创建和编辑您的家谱。Genea 让您完全控制存储 GEDCOM 家族遗产数据的位置。" />
+    <meta name="keywords" content="genea,家谱,软件,免费,开源,gedcom,家族树,家族血统,遗产,myheritage,基于网络,在线,家谱学家,历史学家,祖先,档案,世系,出生,死亡,葬礼,婚姻,隐私设计" />
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <!-- Dependencies -->
     <script src="resources/vuejs/vue.js"></script>
@@ -36,98 +36,95 @@
 <body>
     <div id="genea">
 
-        <!-- Start -->
+        <!-- 开始 -->
         <div id="overlay" v-if="page=='start'" class="container" style="max-width: 600px;">
             <h1 class="header">Genea.app</h1>
             <div class="divider"></div>
             <div class="section" v-if="!isNative()">
-                <h4 class="light">Build and edit your family tree; completely free!</h4>
+                <h4 class="light">构建和编辑您的家谱；完全免费！</h4>
                 <p style="text-align: justify;">
-                    Genea is a <a href="https://en.wikipedia.org/wiki/Privacy_by_design" target="_blank">privacy by design</a> and <a href="https://github.com/genea-app/genea-app" target="_blank">open source</a> tool anyone can use to author or edit their
-                    family tree. Your data is formatted following the <a href="https://www.gedcom.org/" target="_blank">GEDCOM</a> specifications so it can be exchanged with other genealogy services. All processing is done in the browser, leaving you
-                    in control on where to save your data, avoiding any type of vendor lock-in.
+                    Genea 是一个遵循<a href="https://en.wikipedia.org/wiki/Privacy_by_design" target="_blank">隐私设计</a>和<a href="https://github.com/genea-app/genea-app" target="_blank">开源</a>原则的工具，任何人都可以使用它来创建或编辑自己的家谱。您的数据格式遵循<a href="https://www.gedcom.org/" target="_blank">GEDCOM</a>规范，因此可以与其他家谱服务进行交换。所有处理都在浏览器中完成，让您完全控制数据的保存位置，避免任何形式的供应商锁定。
                 </p>
                 <p>
                     <a href="screenshots/doe_family.mp4" target="_blank">
-                        <img src="screenshots/doe_family.png" title="Family tree preview" class="responsive-img" />
+                        <img src="screenshots/doe_family.png" title="家谱预览" class="responsive-img" />
                     </a>
                 </p>
                 <p style="text-align: justify;">
-                    You can use Genea both on your mobile devices as well as on your desktop. The changes you make are persistently stored on your device. To work on your family tree from multiple devices, you can either save the GEDCOM file when you are done and exchange
-                    it for example via e-mail or a cloud service like Dropbox, or you can use the built in Git integration which lets you store your work in any private or public repository.
+                    您可以在移动设备和桌面设备上使用 Genea。您所做的更改会持久存储在您的设备上。要从多个设备上工作，您可以保存 GEDCOM 文件并通过电子邮件或云服务（如 Dropbox）进行交换，或者使用内置的 Git 集成将工作存储在任何私有或公共仓库中。
                 </p>
             </div>
             <div class="section" v-if="isNative()">
-                <h4 class="light">Build and edit your family tree</h4>
+                <h4 class="light">构建和编辑您的家谱</h4>
                 <p style="text-align: justify;">
-                    Create a new family tree from scratch, or start from a GEDCOM file previously exported from other services like MyHeritage, FamilySearch, or Ancestry.
+                    从头开始创建新的家谱，或从其他服务（如 MyHeritage、FamilySearch 或 Ancestry）导出的 GEDCOM 文件开始。
                 </p>
             </div>
             <div class="section" v-if="isLocalStorage()" v-cloak>
                 <button class="btn-large waves-effect waves-light  red lighten-2" v-on:click="page='tree'; loadLocalStorage()">
                     <i class="material-icons left">sync</i>
-                    Continue with current family tree
+                    继续当前家谱
                 </button>
             </div>
             <div class="section">
                 <button class="btn-large waves-effect waves-light teal darken-3" v-on:click="loadExample('new')">
                     <i class="material-icons left">create</i>
-                    Start new family tree
+                    创建新的家谱
                 </button>
                 <label class="btn-large waves-effect waves-light" v-on:click="openGitModal('load')">
 					<i class="material-icons left">cloud_download</i>
-					Open
+					打开
 				</label>
                 <label class="btn-large waves-effect waves-light">
 					<i class="material-icons left">get_app</i>
-					Upload
+					上传
 					<input type="file" style="display: none;" accept=".gedcom,.ged,.txt" v-on:change="loadFile">
 				</label>
             </div>
             <div class="section">
-                <h4 class="light">Examples</h4>
+                <h4 class="light">示例</h4>
                 <p>
-                    Explore Genea with these sample trees.
+                    使用这些示例家谱探索 Genea。
                 </p>
             </div>
             <div class="section">
                 <div class="collection left-align">
                     <a href="#" v-on:click="loadExample('royal92')" class="collection-item avatar">
-                        <span class="title">Royal '92</span>
+                        <span class="title">皇家 '92</span>
                         <img src="sample/royal92.png" alt="" class="circle">
-                        <p>Features the Kings and Queens of Europe, including Great Britain. Published back in 1992 by Denis R. Reid it is perhaps a little out of date, but it is a classic.</p>
+                        <p>包括欧洲各国君主，尤其是英国的国王和女王。由 Denis R. Reid 于 1992 年出版，虽然可能有些过时，但它是一个经典。</p>
                     </a>
                     <a href="#" v-on:click="loadExample('pres2020')" class="collection-item avatar">
-                        <span class="title">Presidents 2020</span>
+                        <span class="title">总统 2020</span>
                         <img src="sample/pres2020.png" alt="" class="circle">
-                        <p>An excellent collection of the presidents of the US, with their ancestors and descendants updated to 2020 by Paul Stobbe.</p>
+                        <p>美国历任总统及其祖先和后代的优秀集合，由 Paul Stobbe 更新至 2020 年。</p>
                     </a>
                     <a href="#" v-on:click="loadExample('harrypotter')" class="collection-item avatar">
-                        <span class="title">Harry Potter</span>
+                        <span class="title">哈利波特</span>
                         <img src="sample/harrypotter.png" alt="" class="circle">
-                        <p>Fictional family tree for the Harry Potter series, created by famousfamilytrees.blogspot.com.</p>
+                        <p>《哈利波特》系列的小说家谱，由 famousfamilytrees.blogspot.com 创建。</p>
                     </a>
                 </div>
             </div>
             <div class="section" v-if="isDebug()">
-                <h4 class="light">Debug</h4>
+                <h4 class="light">调试</h4>
             </div>
             <div class="section" v-if="isDebug()">
-                <button class="btn-large waves-effect waves-light" v-on:click="loadExample('gedcom1')">Debug Example 1</button>
+                <button class="btn-large waves-effect waves-light" v-on:click="loadExample('gedcom1')">调试示例 1</button>
             </div>
             <div class="divider" v-if="!isNative()"></div>
             <div class="section" v-if="!isNative()">
                 <p>
-                    <a href="mailto:contact@genea.app" target="_blank">contact</a> -
-                    <a href="https://github.com/genea-app/genea-app/issues" target="_blank">issues</a> -
-                    <a href="https://github.com/genea-app/genea-app" target="_blank">github</a> -
-                    <a href="https://github.com/genea-app/genea-app/blob/main/LICENSE" target="_blank">license</a> -
-                    <a href="https://github.com/genea-app/genea-app/blob/main/PRIVACY.md" target="_blank">privacy</a>
+                    <a href="mailto:contact@genea.app" target="_blank">联系我们</a> -
+                    <a href="https://github.com/genea-app/genea-app/issues" target="_blank">问题反馈</a> -
+                    <a href="https://github.com/genea-app/genea-app" target="_blank">GitHub</a> -
+                    <a href="https://github.com/genea-app/genea-app/blob/main/LICENSE" target="_blank">许可协议</a> -
+                    <a href="https://github.com/genea-app/genea-app/blob/main/PRIVACY.md" target="_blank">隐私政策</a>
                 </p>
             </div>
         </div>
 
-        <!-- App -->
+        <!-- 应用 -->
         <header v-show="Object.keys(person).length > 0 && page!='start'" v-cloak>
             <a data-target="nav-mobile" class="top-nav sidenav-trigger btn-floating btn-large teal lighten-3 waves-effect waves-light hide-on-large-only" style="margin: 15px;">
                 <i class="material-icons">menu</i>
@@ -151,7 +148,7 @@
                     <div class="row" style="margin-top: 0; margin-bottom: 0;">
                         <div class="input-field col s11 offset-s1" style="margin-top: 0; margin-bottom: 0;">
                             <i class="material-icons" style="position: absolute; display: inline-block; right: 24px; top: 15px;">search</i>
-                            <input id="search" placeholder="Find Person" class="autocomplete" style="font-weight: 300; color: #777; border: 0;" />
+                            <input id="search" placeholder="查找人员" class="autocomplete" style="font-weight: 300; color: #777; border: 0;" />
                         </div>
                     </div>
                 </li>
@@ -159,45 +156,45 @@
                     <div class="divider"></div>
                 </li>
                 <li>
-                    <a class="subheader">View</a>
+                    <a class="subheader">视图</a>
                 </li>
                 <li class="bold sidenav-close" :class="{active: page=='tree'}">
-                    <a :href="'#/tree/' + person.id" class="waves-effect waves-teal"><i class="material-icons">account_tree</i>Family Tree</a>
+                    <a :href="'#/tree/' + person.id" class="waves-effect waves-teal"><i class="material-icons">account_tree</i>家谱</a>
                 </li>
                 <li class="bold sidenav-close" :class="{active: page=='personaldetails'}">
-                    <a :href="'#/personaldetails/' + person.id" class="waves-effect waves-teal"><i class="material-icons">person</i>Personal Details</a>
+                    <a :href="'#/personaldetails/' + person.id" class="waves-effect waves-teal"><i class="material-icons">person</i>个人详情</a>
                 </li>
                 <li class="bold sidenav-close" :class="{active: page=='relations'}">
-                    <a :href="'#/relations/' + person.id" class="waves-effect waves-teal"><i class="material-icons">people</i>Relations and Children</a>
+                    <a :href="'#/relations/' + person.id" class="waves-effect waves-teal"><i class="material-icons">people</i>关系和子女</a>
                 </li>
                 <li>
                     <div class="divider"></div>
                 </li>
                 <li>
-                    <a class="subheader">Actions</a>
+                    <a class="subheader">操作</a>
                 </li>
                 <li class="bold sidenav-close">
-                    <a @click.prevent="saveGit();" v-if="isGitConnected() && !git.outstandingChanges" class="waves-effect waves-teal grey-text"><i class="material-icons">published_with_changes</i>Up to date</a>
-                    <a @click.prevent="saveGit();" v-if="isGitConnected() && git.outstandingChanges" class="waves-effect waves-teal"><i class="material-icons">cloud_upload</i>Unsaved changes</a>
-                    <a @click.prevent="saveGit();" v-if="!isGitConnected()" class="waves-effect waves-teal"><i class="material-icons">cloud_upload</i>Save to Git</a>
+                    <a @click.prevent="saveGit();" v-if="isGitConnected() && !git.outstandingChanges" class="waves-effect waves-teal grey-text"><i class="material-icons">published_with_changes</i>已更新</a>
+                    <a @click.prevent="saveGit();" v-if="isGitConnected() && git.outstandingChanges" class="waves-effect waves-teal"><i class="material-icons">cloud_upload</i>未保存的更改</a>
+                    <a @click.prevent="saveGit();" v-if="!isGitConnected()" class="waves-effect waves-teal"><i class="material-icons">cloud_upload</i>保存到 Git</a>
                 </li>
                 <li class="bold sidenav-close" v-if="!isNative()">
-                    <a @click.prevent="saveFile();" class="waves-effect waves-teal"><i class="material-icons">save_alt</i>Download</a>
+                    <a @click.prevent="saveFile();" class="waves-effect waves-teal"><i class="material-icons">save_alt</i>下载</a>
                 </li>
                 <li class="bold sidenav-close" v-if="isNative()">
-                    <a @click.prevent="shareFile();" class="waves-effect waves-teal"><i class="material-icons">share</i>Share</a>
+                    <a @click.prevent="shareFile();" class="waves-effect waves-teal"><i class="material-icons">share</i>分享</a>
                 </li>
                 <li class="bold sidenav-close">
-                    <a @click="close();" class="waves-effect waves-teal"><i class="material-icons">logout</i>Close</a>
+                    <a @click="close();" class="waves-effect waves-teal"><i class="material-icons">logout</i>关闭</a>
                 </li>
                 <li v-if="isDebug()">
                     <div class="divider"></div>
                 </li>
                 <li v-if="isDebug()">
-                    <a class="subheader">Development</a>
+                    <a class="subheader">开发</a>
                 </li>
                 <li class="bold sidenav-close" :class="{active: page=='debug'}" v-if="isDebug()">
-                    <a :href="'#/debug'" class="waves-effect waves-teal"><i class="material-icons">adb</i>Debug</a>
+                    <a :href="'#/debug'" class="waves-effect waves-teal"><i class="material-icons">adb</i>调试</a>
                 </li>
             </ul>
         </header>
@@ -218,43 +215,42 @@
             <debug :debug="debug" />
         </main>
 
-        <!-- Modals -->
+        <!-- 弹窗 -->
         <new-person :person="person" ref="modalNewPerson" />
         <div id="modalGit" class="modal">
             <div class="modal-content">
                 <div class="row">
-                    <h4>Git Repository</h4>
+                    <h4>Git 仓库</h4>
                 </div>
                 <div class="row">
-                    <p>Connect to a Git Repository to load or save your GEDCOM family tree. You can use a hosted service like <a href="https://github.com/" target="_blank">GitHub</a> or <a href="https://gitlab.com/" target="_blank">GitLab</a>, or connect
-                        to a self hosted repository like <a href="https://gitea.io/" target="_blank">Gitea</a>, <a href="https://gogs.io/" target="_blank">Gogs</a>, or <a href="https://github.com/gitbucket/gitbucket" target="_blank">GitBucket</a>.</p>
+                    <p>连接到 Git 仓库以加载或保存您的 GEDCOM 家谱。您可以使用托管服务（如 <a href="https://github.com/" target="_blank">GitHub</a> 或 <a href="https://gitlab.com/" target="_blank">GitLab</a>），或连接到自托管仓库（如 <a href="https://gitea.io/" target="_blank">Gitea</a>、<a href="https://gogs.io/" target="_blank">Gogs</a> 或 <a href="https://github.com/gitbucket/gitbucket" target="_blank">GitBucket</a>）。</p>
                 </div>
                 <div class="row">
-                    <h4>Connection Details</h4>
+                    <h4>连接详细信息</h4>
                 </div>
                 <div class="row">
                     <div class="input-field">
-                        <label for="gitRepository" class="active">Repository URL</label>
+                        <label for="gitRepository" class="active">仓库 URL</label>
                         <input id="gitRepository" type="text" v-model="git.repository" />
                     </div>
                     <div class="input-field">
-                        <label for="gitBranch" class="active">Branch</label>
+                        <label for="gitBranch" class="active">分支</label>
                         <input id="gitBranch" type="text" v-model="git.branch" />
                     </div>
                     <div class="input-field">
-                        <label for="gitPersonalAccessToken" class="active">Personal Access Token</label>
+                        <label for="gitPersonalAccessToken" class="active">个人访问令牌</label>
                         <input id="gitPersonalAccessToken" type="text" v-model="git.personalAccessToken" />
                     </div>
                     <div class="input-field">
-                        <label for="gitCorsProxy" class="active">CORS Proxy (optional)</label>
+                        <label for="gitCorsProxy" class="active">CORS 代理（可选）</label>
                         <input id="gitCorsProxy" type="text" v-model="git.corsProxy" />
                     </div>
                 </div>
-                <a class="btn waves-effect waves-light modal-close" v-show="git.operation=='load'" v-on:click="loadGitData();"><i class="material-icons left">link</i>Load</a>
-                <a class="btn waves-effect waves-light modal-close" v-show="git.operation=='save'" v-on:click="saveGitData();"><i class="material-icons left">link</i>Save</a>
+                <a class="btn waves-effect waves-light modal-close" v-show="git.operation=='load'" v-on:click="loadGitData();"><i class="material-icons left">link</i>加载</a>
+                <a class="btn waves-effect waves-light modal-close" v-show="git.operation=='save'" v-on:click="saveGitData();"><i class="material-icons left">link</i>保存</a>
             </div>
             <div class="modal-footer">
-                <a class="modal-close waves-effect waves-green btn-flat">Close</a>
+                <a class="modal-close waves-effect waves-green btn-flat">关闭</a>
             </div>
         </div>
 
@@ -325,17 +321,17 @@
             },
             methods: {
                 autoSave: function() {
-                    // Save changes into local storage
+                    // 将更改保存到本地存储
                     window.clearTimeout(window.autoSaveTimeout);
                     window.autoSaveTimeout = window.setTimeout(function() {
                         genea.saveLocalStorage();
                     }, 1000);
-                    // If git is connected, save changes
+                    // 如果 Git 已连接，则保存更改
                     if (genea.isGitConnected()) {
-                        // Delay saving until no changes have been made for 10 seconds
+                        // 延迟保存，直到10秒内没有更改
                         clearTimeout(window.autoGitSaveTimeout);
                         window.autoGitSaveTimeout = setTimeout(function() {
-                            // Let only one window auto save
+                            // 让一个窗口自动保存
                             if (!window.localStorage.getItem("isGitSaving")) {
                                 window.localStorage.setItem("isGitSaving", true);
                                 genea.saveGitData();
@@ -346,7 +342,7 @@
                     }
                 },
                 loadExample: function(example) {
-                    if (!stamboom.isLoaded || window.confirm("This will clear the family tree you previously had open.")) {
+                    if (!stamboom.isLoaded || window.confirm("这将清除您之前打开的家谱。")) {
                         genea.page = "tree";
                         if (example == "new") {
                             fetch("sample/empty.ged").then(function(response) {
@@ -391,16 +387,16 @@
                     }
                 },
                 close: function() {
-                    if ((this.isGitConnected() && !this.git.outstandingChanges) || window.confirm("This will clear the family tree. Changes made will not be saved.")) {
-                        // Clear local storage
+                    if ((this.isGitConnected() && !this.git.outstandingChanges) || window.confirm("这将清除家谱。所做的更改将不会被保存。")) {
+                        // 清除本地存储
                         window.localStorage.clear();
-                        // Go back to start
+                        // 返回开始页面
                         document.location = document.location.origin + document.location.pathname;
                     }
                     return false;
                 },
                 loadFile: function(event) {
-                    if (!stamboom.isLoaded || window.confirm("This will clear the family tree you previously had open.")) {
+                    if (!stamboom.isLoaded || window.confirm("这将清除您之前打开的家谱。")) {
                         let file = event.srcElement.files[0];
                         let reader = new FileReader();
                         reader.readAsText(file);
@@ -410,7 +406,7 @@
                             stamboom.select();
                         };
                         reader.onerror = function() {
-                            alert("Error reading selected file.");
+                            alert("读取所选文件时出错。");
                         };
                     }
                 },
@@ -429,15 +425,15 @@
                         type: "text/plain"
                     });
                     var share = {
-                        title: "Family Tree",
-                        text: "Authored using Genea.app; https://www.genea.app/",
+                        title: "家谱",
+                        text: "使用 Genea.app 制作；https://www.genea.app/",
                         files: [file]
                     }
                     try {
                         navigator.share(share);
                     } catch (e) {
-                        console.log("Error sharing file:", e);
-                        alert("Error sharing file");
+                        console.log("分享文件时出错:", e);
+                        alert("分享文件时出错");
                     }
                 },
                 openGitModal: function(operation) {
@@ -460,18 +456,18 @@
                     }
                 },
                 loadGitData: async function() {
-                    // Load family tree from a git repository
+                    // 从 Git 仓库加载家谱
                     if (!this.isGitConnected()) {
-                        alert("Cannot connect to Git due to a missing Repository URL, Branch, or Personal Access Token.");
+                        alert("由于缺少仓库 URL、分支或个人访问令牌，无法连接到 Git。");
                         return;
                     }
                     try {
-                        // Clean state
+                        // 清除状态
                         window.fs = new LightningFS('fs', {
                             wipe: true
                         });
                         window.pfs = window.fs.promises;
-                        // Create local file system
+                        // 创建本地文件系统
                         window.dir = "/gedcom";
                         await pfs.mkdir(dir);
                         await git.clone({
@@ -487,7 +483,7 @@
                                 username: this.git.personalAccessToken
                             })
                         });
-                        // Load file
+                        // 加载文件
                         var files = await pfs.readdir(dir);
                         if (files.includes("genea.ged")) {
                             var result = new TextDecoder().decode(await pfs.readFile(dir + '/genea.ged'));
@@ -499,10 +495,10 @@
                                 stamboom.select(selectedPerson);
                             }
                         } else {
-                            alert("Cannot load GEDCOM file. Ensure there is a file called 'genea.ged' in the root of the repository.");
+                            alert("无法加载 GEDCOM 文件。请确保仓库根目录下有一个名为 'genea.ged' 的文件。");
                         }
                     } catch (e) {
-                        alert(`Error connecting to Git repository or loading GEDCOM file.\n\nMessage: ${e.message}`);
+                        alert(`连接到 Git 仓库或加载 GEDCOM 文件时出错。\n\n消息: ${e.message}`);
                     }
                 },
                 saveGit: function() {
@@ -513,18 +509,18 @@
                     }
                 },
                 saveGitData: async function() {
-                    // Save family tree to a git repository
+                    // 将家谱保存到 Git 仓库
                     if (!this.isGitConnected()) {
-                        alert("Cannot connect to Git due to a missing Repository URL, Branch, or Personal Access Token.");
+                        alert("由于缺少仓库 URL、分支或个人访问令牌，无法连接到 Git。");
                         return;
                     }
                     try {
-                        // Clean state
+                        // 清除状态
                         window.fs = new LightningFS('fs', {
                             wipe: true
                         });
                         window.pfs = window.fs.promises;
-                        // Create local file system
+                        // 创建本地文件系统
                         window.dir = "/gedcom";
                         await pfs.mkdir(dir);
                         await git.clone({
@@ -540,15 +536,15 @@
                                 username: this.git.personalAccessToken
                             })
                         });
-                        // Save file
+                        // 保存文件
                         await pfs.writeFile(`${dir}/genea.ged`, stamboom.save(), "utf8");
-                        // Stage file
+                        // 暂存文件
                         await git.add({
                             fs,
                             dir,
                             filepath: "genea.ged"
                         });
-                        // Commit file
+                        // 提交文件
                         let sha = await git.commit({
                             fs,
                             dir,
@@ -556,10 +552,10 @@
                                 name: "Genea.app",
                                 email: "git@genea.app",
                             },
-                            message: `Updated "genea.ged" at ${new Date().toISOString().replace("T", " ").replace("Z", "")}`
+                            message: `于 ${new Date().toISOString().replace("T", " ").replace("Z", "")} 更新 "genea.ged"`
                         })
-                        console.log("Committed:", sha);
-                        // Push change
+                        console.log("已提交:", sha);
+                        // 推送更改
                         let pushResult = await git.push({
                             fs,
                             http,
@@ -570,15 +566,15 @@
                                 username: this.git.personalAccessToken
                             }),
                         });
-                        console.log("Pushed:", pushResult);
+                        console.log("已推送:", pushResult);
                         window.localStorage.removeItem("isGitSaving");
                         if (pushResult.ok) {
                             this.git.outstandingChanges = false;
                         } else {
-                            alert("Cannot save GEDCOM file.");
+                            alert("无法保存 GEDCOM 文件。");
                         }
                     } catch (e) {
-                        alert(`Error connecting to Git repository or saving GEDCOM file.\n\nMessage: ${e.message}`);
+                        alert(`连接到 Git 仓库或保存 GEDCOM 文件时出错。\n\n消息: ${e.message}`);
                     }
                 },
                 isLocalStorage: function() {
@@ -613,7 +609,7 @@
                 },
                 isDebug: function() {
                     if (window.sessionStorage.getItem("isDebug") != "on") {
-                        // This function will detect whether Dev Tools are on, and if so, enable debug mode for the session
+                        // 该函数将检测是否打开了 Dev Tools，如果是，则为会话启用调试模式
                         var t1 = new Date();
                         debugger;
                         if (new Date() - t1 > 200) {
